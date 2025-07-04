@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function User({ user, users, id, setUsers, phoneNumber }) {
+export default function User({ user, users, id, setUsers, phoneNumber, country }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editedName, setEditedName] = useState(user);
     const [editedPhone, setEditedPhone] = useState(phoneNumber || '');
@@ -67,6 +67,7 @@ export default function User({ user, users, id, setUsers, phoneNumber }) {
                 <div className="user-display">
                     <span className="user-name">{user}</span>
                     {phoneNumber && <span className="user-phone"> - Phone: {phoneNumber}</span>}
+                    {country && <span className="user-country"> - Country: {country}</span>}
                     <div className="user-buttons">
                         <button onClick={handleEditToggle} className="edit-btn">
                             Éditer

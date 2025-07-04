@@ -8,6 +8,7 @@ import './App.css'
 import UsersList from './UsersList.jsx'        // Affiche la liste des utilisateurs
 import Count from './Count.jsx'                // Affiche un compteur et des boutons pour le modifier
 import Form from './Form.jsx'                  // Formulaire d'ajout d'un utilisateur
+import Form2 from './Form2.jsx'                  // Formulaire d'ajout d'un utilisateur
 import Header from './Header.jsx'              // En-tête de l'application
 import DeleteButton from './DeleteButton.jsx'  // Bouton pour supprimer tous les utilisateurs
 import Clock from './Clock.jsx'                // Affiche une horloge en temps réel
@@ -59,7 +60,7 @@ function App() {
       <Count count={count} setCount={setCount} />
 
       {/* Formulaire d'ajout d'un utilisateur (utilise l'état users pour ajouter un nouvel utilisateur) */}
-      <Form users={users} setUsers={setUsers} />
+      <Form2 users={users} setUsers={setUsers} />
 
       {/* Champ de recherche (filtrage en direct) */}
       <Search search={search} setSearch={setSearch} />

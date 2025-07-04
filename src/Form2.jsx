@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Form({users, setUsers}) {
+function Form2({users, setUsers}) {
     const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [country, setCountry] = useState("");
@@ -128,4 +128,4 @@ function Form({users, setUsers}) {
     );
 }
 
-export default Form;
+export default Form2;
