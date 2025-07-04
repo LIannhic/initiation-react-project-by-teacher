@@ -55,9 +55,6 @@ function App() {
       {/* Horloge en temps réel */}
       <Clock />
 
-      {/* Liste des pays (peut-être utilisée pour un choix ou affichage décoratif) */}
-      <CountryList />
-
       {/* Composant compteur : permet d'incrémenter/décrémenter une valeur */}
       <Count count={count} setCount={setCount} />
 
