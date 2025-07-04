@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 // Composant Form2, recevant deux props :
 // - users : liste actuelle des utilisateurs
 // - setUsers : fonction pour mettre à jour la liste
-function Form2({ users, setUsers }) {
+function Form({ users, setUsers }) {
   // États pour les champs du formulaire
   const [name, setName] = useState("");               // Nom saisi
   const [phoneNumber, setPhoneNumber] = useState(""); // Numéro de téléphone saisi
@@ -176,4 +176,4 @@ function Form2({ users, setUsers }) {
 }
 
 // Export du composant Form2 pour utilisation dans App
-export default Form2;
+export default Form;

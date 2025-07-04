@@ -1,73 +1,78 @@
-// ✅ Import des hooks React nécessaires
+// Importation des hooks React pour la gestion d'état et des effets de bord
 import { useState, useEffect } from 'react'
 
-// ✅ Import des styles globaux de l'application
+// Importation des styles CSS globaux
 import './App.css'
 
-// ✅ Importation des composants de l’application
-import UsersList from './UsersList.jsx'
-import Count from './Count.jsx'
-import Form from './Form.jsx'          // (ou Form2 selon ta structure)
-import Header from './Header.jsx'
-import DeleteButton from './DeleteButton.jsx'
-import Clock from './Clock.jsx'
-import Search from './Search.jsx'
-import CountryList from './CountryList.jsx'
+// Importation des composants enfants
+import UsersList from './UsersList.jsx'        // Affiche la liste des utilisateurs
+import Count from './Count.jsx'                // Affiche un compteur et des boutons pour le modifier
+import Form from './Form3.jsx'                  // Formulaire d'ajout d'un utilisateur
+import Header from './Header.jsx'              // En-tête de l'application
+import DeleteButton from './DeleteButton.jsx'  // Bouton pour supprimer tous les utilisateurs
+import Clock from './Clock.jsx'                // Affiche une horloge en temps réel
+import Search from './Search.jsx'              // Champ de recherche pour filtrer les utilisateurs
+import CountryList from './CountryList.jsx'    // Liste ou sélection de pays
 
+// Définition du composant principal de l'application
 function App() {
-  // 🎯 État local pour le compteur (utilisé avec <Count />)
+  // Déclaration d’un état local pour le compteur (entier)
   const [count, setCount] = useState(0)
 
-  // 🎯 État contenant la liste des utilisateurs (affichée dans <UsersList />)
+  // État local pour stocker la liste des utilisateurs (tableau d'objets)
   const [users, setUsers] = useState([])
 
-  // 🎯 État pour le champ de recherche (utilisé par <Search /> pour filtrer)
+  // État local pour stocker la valeur de recherche (chaîne de caractères)
   const [search, setSearch] = useState('')
 
-  // 🔍 Liste filtrée des utilisateurs selon le critère de recherche
+  // Filtrage dynamique des utilisateurs selon la valeur de recherche :
+  // - correspondance partielle dans le nom (insensible à la casse)
+  // - ou correspondance exacte dans le numéro de téléphone
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(search.toLowerCase()) ||
-    user.phoneNumber.includes(search)
-  )
+    user.phoneNumber.includes(search) ||
+    user.country.toLowerCase().includes(search.toLowerCase())
+  );
 
-  // 🧠 useEffect exécuté au premier rendu pour recharger les utilisateurs stockés localement
+  // useEffect exécuté au montage du composant uniquement (grâce au tableau de dépendances vide)
   useEffect(() => {
-    console.log('Load') // Log utile pour le debug en développement
+    console.log('Load')  // Pour débogage : indique que le composant s’est monté
+
+    // Lecture de la clé 'users' dans le localStorage
     const storedUsers = localStorage.getItem('users')
+
+    // Si des utilisateurs sont présents, on les parse depuis le format JSON
     if (storedUsers) {
-      setUsers(JSON.parse(storedUsers)) // Restauration depuis le localStorage
+      setUsers(JSON.parse(storedUsers))
     }
   }, [])
 
+  // Rendu JSX : structure visuelle de l'application
   return (
     <>
-      {/* 🧩 En-tête de l’application avec les logos Vite et React */}
+      {/* En-tête de la page */}
       <Header />
 
-      {/* 🕒 Affiche l’heure actuelle, mise à jour chaque seconde */}
+      {/* Horloge en temps réel */}
       <Clock />
 
-      {/* 🌍 Liste des pays disponibles (peut être utilisée ailleurs dans le formulaire) 
-      <CountryList />
-      */}
-
-      {/* 🔢 Composant compteur avec bouton +1 */}
+      {/* Composant compteur : permet d'incrémenter/décrémenter une valeur */}
       <Count count={count} setCount={setCount} />
 
-      {/* 📋 Formulaire pour ajouter un utilisateur (nom, téléphone, pays) */}
+      {/* Formulaire d'ajout d'un utilisateur (utilise l'état users pour ajouter un nouvel utilisateur) */}
       <Form users={users} setUsers={setUsers} />
 
-      {/* 🔎 Barre de recherche filtrant les utilisateurs par nom ou numéro */}
+      {/* Champ de recherche (filtrage en direct) */}
       <Search search={search} setSearch={setSearch} />
 
-      {/* 👥 Liste filtrée des utilisateurs affichés dynamiquement */}
+      {/* Liste des utilisateurs, déjà filtrée selon la recherche */}
       <UsersList users={filteredUsers} setUsers={setUsers} />
 
-      {/* 🗑️ Bouton pour supprimer tous les utilisateurs de la liste */}
+      {/* Bouton pour supprimer tous les utilisateurs */}
       <DeleteButton setUsers={setUsers} />
     </>
   )
 }
 
-// ✅ Exportation du composant principal de l'application
+// Exportation du composant pour pouvoir l’utiliser ailleurs dans l'application
 export default App
