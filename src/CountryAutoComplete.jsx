@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { useCountrySearch } from './useCountrySearch';
 
-export function CountryAutocomplete({ value, onChange, error }) {
-    const { searchTerm, setSearchTerm, countries, loading } = useCountrySearch();
+export function CountryAutocomplete({ value, onChange }) {
+    const { searchTerm, setSearchTerm, countries, loading, error } = useCountrySearch();
     const inputRef = useRef(null);
 
     const handleInputChange = (inputValue) => {

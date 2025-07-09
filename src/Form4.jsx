@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
 import { CountryAutocomplete } from './CountryAutoComplete';
 
-function Form4() {
+function Form4({users, setUsers}) {
     const [formData, setFormData] = useState({
         name: '',
         country: '',
         phoneNumber: ''
     });
     const [errors, setErrors] = useState({});
-
-    const handleInputChange = (field, value) => {
-        setFormData(prev => ({ ...prev, [field]: value }));
-        if (errors[field]) {
-            setErrors(prev => ({ ...prev, [field]: '' }));
-        }
-    };
 
     const validateForm = () => {
         const newErrors = {};
@@ -27,9 +20,19 @@ function Form4() {
     };
 
     const handleSubmit = (e) => {
+        const updatedUsers = [...users, formData];
         e.preventDefault();
         if (validateForm()) {
             console.log('Données valides:', formData);
+        }
+        setUsers(updatedUsers);
+        localStorage.setItem('users', JSON.stringify(updatedUsers));
+    };
+
+    const handleInputChange = (field, value) => {
+        setFormData(prev => ({ ...prev, [field]: value }));
+        if (errors[field]) {
+            setErrors(prev => ({ ...prev, [field]: '' }));
         }
     };
 

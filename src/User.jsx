@@ -4,7 +4,6 @@ export default function User({ user, users, id, setUsers, phoneNumber, country }
     const [isEditing, setIsEditing] = useState(false);
     const [editedName, setEditedName] = useState(user);
     const [editedPhone, setEditedPhone] = useState(phoneNumber || '');
-    const [editedCountry, setEditedCountry] = useState(country || '');
 
     function deleteUser(id) {
         const updatedUsers = users.filter((item, i) => i !== id);
@@ -17,7 +16,6 @@ export default function User({ user, users, id, setUsers, phoneNumber, country }
             // Annuler l'édition - remettre les valeurs originales
             setEditedName(user);
             setEditedPhone(phoneNumber || '');
-            setEditedCountry(country || '');
         }
         setIsEditing(!isEditing);
     }
@@ -28,8 +26,7 @@ export default function User({ user, users, id, setUsers, phoneNumber, country }
             if (i === id) {
                 return {
                     name: editedName.trim(),
-                    phoneNumber: editedPhone.trim(),
-                    country: editedCountry.trim()
+                    phoneNumber: editedPhone.trim()
                 };
             }
             return item;
@@ -56,12 +53,6 @@ export default function User({ user, users, id, setUsers, phoneNumber, country }
                         value={editedPhone}
                         onChange={(e) => setEditedPhone(e.target.value)}
                         placeholder="Téléphone"
-                    />
-                                        <input
-                        type="text"
-                        value={editedCountry}
-                        onChange={(e) => setEditedCountry(e.target.value)}
-                        placeholder="Pays"
                     />
                     <div className="edit-buttons">
                         <button onClick={handleSave} className="save-btn">

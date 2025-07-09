@@ -62,3 +62,7 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+.error{
+  display:block;
+  color: red;
+}
